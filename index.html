@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ND-EHR Research Database</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fff;
+    }
+
+    a { color: #1a4b8c; }
+    a:hover { color: #0d2f5e; }
+
+    /* ── Header ── */
+    header {
+      background: #1a3a6b;
+      color: #fff;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+    header .eyebrow {
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #a8c4e8;
+      margin-bottom: 0.75rem;
+    }
+    header h1 {
+      font-size: 2.1rem;
+      font-weight: normal;
+      line-height: 1.3;
+      margin-bottom: 0.9rem;
+    }
+    header .subtitle {
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      color: #c8daf0;
+      max-width: 640px;
+      margin: 0 auto 1.8rem;
+    }
+    .stats-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .stat { text-align: center; }
+    .stat .num {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 1.9rem;
+      font-weight: bold;
+      color: #fff;
+      line-height: 1.1;
+    }
+    .stat .lbl {
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      color: #a8c4e8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: #f0f4fa;
+      border-bottom: 1px solid #d0daea;
+      padding: 0.6rem 2rem;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+    }
+    nav a {
+      color: #1a3a6b;
+      text-decoration: none;
+      margin: 0 0.9rem;
+      font-weight: bold;
+    }
+    nav a:hover { text-decoration: underline; }
+
+    /* ── Main layout ── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+    }
+
+    section { margin-bottom: 3rem; }
+
+    h2 {
+      font-size: 1.35rem;
+      color: #1a3a6b;
+      border-bottom: 2px solid #d0daea;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.1rem;
+      font-weight: normal;
+    }
+
+    h3 {
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #333;
+      margin: 1.4rem 0 0.4rem;
+    }
+
+    p { margin-bottom: 0.9rem; }
+
+    /* ── Tables ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+    thead th {
+      background: #1a3a6b;
+      color: #fff;
+      text-align: left;
+      padding: 0.55rem 0.75rem;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+    }
+    tbody tr:nth-child(even) { background: #f5f8fd; }
+    tbody td {
+      padding: 0.5rem 0.75rem;
+      vertical-align: top;
+      border-bottom: 1px solid #e4eaf4;
+    }
+    tbody td.mono { font-family: "Courier New", monospace; font-size: 0.8rem; color: #444; white-space: nowrap; }
+    tbody td.num { text-align: right; white-space: nowrap; font-family: "Courier New", monospace; }
+    code { font-family: "Courier New", monospace; font-size: 0.85em; background: #f0f4fa; padding: 0.1em 0.35em; border-radius: 3px; }
+
+    /* ── Callout box ── */
+    .callout {
+      background: #f0f4fa;
+      border-left: 4px solid #1a3a6b;
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+    }
+    .callout strong { color: #1a3a6b; }
+
+    /* ── Tag pills ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+    .tag {
+      background: #e6edf8;
+      color: #1a3a6b;
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 20px;
+    }
+
+    /* ── Buttons ── */
+    .btn-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+    .btn {
+      display: inline-block;
+      padding: 0.55rem 1.3rem;
+      border-radius: 4px;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+    }
+    .btn-primary { background: #1a3a6b; color: #fff; }
+    .btn-primary:hover { background: #0d2f5e; color: #fff; }
+    .btn-outline { border: 2px solid #1a3a6b; color: #1a3a6b; }
+    .btn-outline:hover { background: #e6edf8; }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: #f9f9f9;
+      border: 1px solid #dde4f0;
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      max-width: 480px;
+    }
+    .contact-card .name { font-size: 1rem; font-weight: bold; color: #1a1a1a; margin-bottom: 0.2rem; }
+    .contact-card .role { color: #555; margin-bottom: 0.6rem; font-size: 0.85rem; line-height: 1.5; }
+
+    /* ── Footer ── */
+    footer {
+      background: #f0f4fa;
+      border-top: 1px solid #d0daea;
+      text-align: center;
+      padding: 1.5rem 2rem;
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      color: #666;
+    }
+    footer a { color: #1a4b8c; }
+
+    ol, ul { font-family: Arial, sans-serif; font-size: 0.9rem; line-height: 1.9; }
+    ol { padding-left: 1.4rem; }
+    ul { padding-left: 1.4rem; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.5rem; }
+      .stats-bar { gap: 1.2rem; }
+      .stat .num { font-size: 1.4rem; }
+      nav a { margin: 0 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+  <p class="eyebrow">Helfgott Research Institute &middot; National University of Natural Medicine</p>
+  <h1>Naturopathic EHR Research Database</h1>
+  <p class="subtitle">A de-identified, multi-clinic research database assembled from seven community naturopathic practices in Washington State.</p>
+  <div class="stats-bar">
+    <div class="stat"><span class="num">58,498</span><span class="lbl">Patients</span></div>
+    <div class="stat"><span class="num">469,162</span><span class="lbl">Encounters</span></div>
+    <div class="stat"><span class="num">858,394</span><span class="lbl">Clinical Notes</span></div>
+    <div class="stat"><span class="num">3.6 M</span><span class="lbl">Observations</span></div>
+    <div class="stat"><span class="num">7</span><span class="lbl">Clinics</span></div>
+    <div class="stat"><span class="num">2008–2026</span><span class="lbl">Date Range</span></div>
+  </div>
+</header>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav>
+  <a href="#about">About</a>
+  <a href="#contents">Database Contents</a>
+  <a href="#dictionary">Data Dictionary</a>
+  <a href="#access">Data Access</a>
+  <a href="#code">Code &amp; Governance</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main>
+
+  <!-- About -->
+  <section id="about">
+    <h2>About the Database</h2>
+    <p>This database was assembled as part of a methods-feasibility pilot funded by RAND REACH / NCCIH (U24 Pilot Grant) and conducted at the Helfgott Research Institute, National University of Natural Medicine. De-identified retrospective EHR data were extracted from seven community naturopathic clinics in Washington State using the FHIR R4 API, de-identified using Google Cloud Healthcare API and Data Loss Prevention, and loaded into a structured cloud-based research database (Google BigQuery).</p>
+    <p>The database supports population characterization, treatment-pattern analysis, and longitudinal outcome analyses. Treatment orders were extracted from clinical notes using a validated keyword classification system (positive predictive value 93.3%, 95% CI: 90–96%) and categorized into 12 naturopathic treatment modalities.</p>
+    <p>The study was approved by the NUNM Institutional Review Board (IRB #CK021726). All clinics executed data sharing agreements prior to data extraction.</p>
+    <div class="tags">
+      <span class="tag">Naturopathic Medicine</span>
+      <span class="tag">Electronic Health Records</span>
+      <span class="tag">FHIR R4</span>
+      <span class="tag">De-identified</span>
+      <span class="tag">Natural Language Processing</span>
+      <span class="tag">Treatment Patterns</span>
+      <span class="tag">Longitudinal</span>
+      <span class="tag">Real-World Data</span>
+    </div>
+  </section>
+
+  <!-- Database Contents -->
+  <section id="contents">
+    <h2>Database Contents</h2>
+
+    <h3>Patient Population</h3>
+    <table>
+      <thead><tr><th>Characteristic</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Patients</td><td>58,498 (68.1% female; mean age 42.7 years)</td></tr>
+        <tr><td>Encounters</td><td>469,162 across 7 clinics (2008–2026)</td></tr>
+        <tr><td>Clinical notes</td><td>858,394 (CarePlan + DocumentReference)</td></tr>
+        <tr><td>Observations</td><td>3.6 million structured lab and vital sign records</td></tr>
+        <tr><td>Conditions</td><td>1.4 million records (use <code>conditions_unique</code> view for prevalence analysis)</td></tr>
+        <tr><td>Medication orders</td><td>46,098 ND-initiated prescription orders</td></tr>
+        <tr><td>Treatment orders</td><td>406,731 NLP-extracted clinician treatment orders (<code>is_order = TRUE</code>)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Treatment Categories</h3>
+    <p>Treatment orders were extracted from plan sections of clinical notes and classified into 12 naturopathic treatment modalities. Three additional categories are captured as clinical practice metrics.</p>
+    <table>
+      <thead><tr><th>Category</th><th>Type</th><th>Elevated HbA1c Cohort (n=2,965)</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">supplement</td><td>Naturopathic treatment</td><td class="num">77.8%</td></tr>
+        <tr><td class="mono">diet_nutrition</td><td>Naturopathic treatment</td><td class="num">47.5%</td></tr>
+        <tr><td class="mono">exercise_physical_activity</td><td>Naturopathic treatment</td><td class="num">39.7%</td></tr>
+        <tr><td class="mono">stress_mindfulness</td><td>Naturopathic treatment</td><td class="num">28.4%</td></tr>
+        <tr><td class="mono">botanical</td><td>Naturopathic treatment</td><td class="num">26.0%</td></tr>
+        <tr><td class="mono">sleep_hygiene</td><td>Naturopathic treatment</td><td class="num">15.4%</td></tr>
+        <tr><td class="mono">hormone_therapy</td><td>Naturopathic treatment</td><td class="num">14.5%</td></tr>
+        <tr><td class="mono">physical_therapy_bodywork</td><td>Naturopathic treatment</td><td class="num">10.9%</td></tr>
+        <tr><td class="mono">tcm_acupuncture</td><td>Naturopathic treatment</td><td class="num">5.4%</td></tr>
+        <tr><td class="mono">iv_therapy</td><td>Naturopathic treatment</td><td class="num">5.0%</td></tr>
+        <tr><td class="mono">hydrotherapy</td><td>Naturopathic treatment</td><td class="num">1.5%</td></tr>
+        <tr><td class="mono">homeopathy</td><td>Naturopathic treatment</td><td class="num">1.4%</td></tr>
+        <tr><td class="mono">lab_diagnostic</td><td>Clinical practice metric</td><td class="num">72.6%</td></tr>
+        <tr><td class="mono">referral</td><td>Clinical practice metric</td><td class="num">—</td></tr>
+        <tr><td class="mono">substance_cessation</td><td>Clinical practice metric</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Pre-Built Research Cohorts</h3>
+    <table>
+      <thead><tr><th>Table</th><th>Definition</th><th>N</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">cohort_elevated_hba1c</td><td>Patients with HbA1c ≥5.7% and ≥1 treatment order</td><td class="num">2,965</td></tr>
+        <tr><td class="mono">cohort_longitudinal_hba1c</td><td>Patients with ≥2 HbA1c measurements</td><td class="num">5,576</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Data Dictionary -->
+  <section id="dictionary">
+    <h2>Data Dictionary</h2>
+    <p>The database is hosted in Google BigQuery (dataset: <code>nd-ehr-analysis.nd_ehr_research</code>) and comprises 11 tables plus derived views.</p>
+
+    <h3>Core Tables</h3>
+    <table>
+      <thead><tr><th>Table</th><th>Key Fields</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="mono">patients</td>
+          <td><code>patient_id</code>, <code>birth_year</code>, <code>birth_sex</code>, <code>race</code>, <code>ethnicity</code>, <code>clinic_id</code></td>
+          <td>Use <code>birth_sex</code> (not <code>gender</code>) — ChARM miscodes ~18K patients as "other" in the gender field. Race/ethnicity 89.1% unknown, reflecting documentation practices.</td>
+        </tr>
+        <tr>
+          <td class="mono">encounters</td>
+          <td><code>encounter_id</code>, <code>patient_id</code>, <code>encounter_date</code>, <code>encounter_type</code>, <code>clinic_id</code></td>
+          <td>Dates are shifted per patient (±0–364 days); within-patient intervals are preserved but absolute calendar dates are approximate.</td>
+        </tr>
+        <tr>
+          <td class="mono">conditions</td>
+          <td><code>condition_id</code>, <code>patient_id</code>, <code>encounter_id</code>, <code>icd10_code</code>, <code>description</code>, <code>onset_date</code></td>
+          <td>Problem list is carried forward to every encounter — always use the <code>conditions_unique</code> view for prevalence analysis.</td>
+        </tr>
+        <tr>
+          <td class="mono">observations</td>
+          <td><code>observation_id</code>, <code>patient_id</code>, <code>encounter_id</code>, <code>loinc_code</code>, <code>test_name</code>, <code>value</code>, <code>unit</code>, <code>obs_date</code></td>
+          <td>3.6M records. Use <code>standardized_observations</code> view for normalized metric names and curated LOINC matching (30–50% of records exported without codes).</td>
+        </tr>
+        <tr>
+          <td class="mono">clinical_notes</td>
+          <td><code>note_id</code>, <code>patient_id</code>, <code>encounter_id</code>, <code>note_type</code>, <code>note_text</code>, <code>note_date</code></td>
+          <td>858,394 plain-text notes (CarePlan + DocumentReference). PHI redacted via Google DLP and rule-based passes.</td>
+        </tr>
+        <tr>
+          <td class="mono">medication_requests</td>
+          <td><code>med_request_id</code>, <code>patient_id</code>, <code>encounter_id</code>, <code>medication_id</code>, <code>instructions</code>, <code>prescribed_date</code></td>
+          <td>ND-initiated prescriptions only. Free-text entry; not normalized to RxNorm.</td>
+        </tr>
+        <tr>
+          <td class="mono">medications</td>
+          <td><code>medication_id</code>, <code>drug_name</code></td>
+          <td>Lookup table for drug names referenced in <code>medication_requests</code>.</td>
+        </tr>
+        <tr>
+          <td class="mono">treatments</td>
+          <td><code>treatment_id</code>, <code>patient_id</code>, <code>encounter_id</code>, <code>note_id</code>, <code>category</code>, <code>keyword_matched</code>, <code>is_order</code>, <code>source_text</code></td>
+          <td>NLP-extracted rows. Filter <code>is_order = TRUE</code> for clinician treatment orders (406,731 rows). Extracted from plan sections only.</td>
+        </tr>
+        <tr>
+          <td class="mono">clinical_note_sections</td>
+          <td><code>section_id</code>, <code>note_id</code>, <code>section_type</code>, <code>section_text</code></td>
+          <td>SOAP section segmentation: subjective, objective, assessment, plan, patient_instructions.</td>
+        </tr>
+        <tr>
+          <td class="mono">cohort_elevated_hba1c</td>
+          <td><code>patient_id</code>, <code>first_elevated_hba1c</code>, <code>hba1c_value</code>, <code>glycemic_group</code>, <code>treatment_count</code></td>
+          <td>Pre-built cohort: HbA1c ≥5.7% + ≥1 treatment order (n=2,965).</td>
+        </tr>
+        <tr>
+          <td class="mono">cohort_longitudinal_hba1c</td>
+          <td><code>patient_id</code>, <code>measurement_count</code>, <code>first_hba1c_date</code>, <code>last_hba1c_date</code>, <code>follow_up_days</code></td>
+          <td>Pre-built cohort: ≥2 HbA1c readings (n=5,576).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Derived Views</h3>
+    <table>
+      <thead><tr><th>View</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="mono">conditions_unique</td>
+          <td>Patient-level deduplicated conditions. Always use this view for prevalence analysis — raw <code>conditions</code> inflates counts due to problem-list carry-forward.</td>
+        </tr>
+        <tr>
+          <td class="mono">standardized_observations</td>
+          <td>Adds normalized <code>metric_name</code> and curated LOINC matching for labs and vitals, handling records exported without standard codes.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Key data quality notes:</strong> Encounter dates are shifted per patient (±0–364 days) — cross-patient calendar-time analyses are not supported. Clinic 1 has minimal lab data (providers did not enter results into ChARM). Race/ethnicity is 89.1% unknown. Medication names are free-text and not normalized to a standard vocabulary. Cross-clinic patient duplication was not corrected; patients seen at multiple clinics appear as distinct records.
+    </div>
+  </section>
+
+  <!-- Data Access -->
+  <section id="access">
+    <h2>Data Access</h2>
+    <p>The de-identified research database is available to qualified investigators under an approved data use agreement (DUA). Access is subject to a signed DUA with the Helfgott Research Institute and IRB determination at the requesting institution.</p>
+
+    <div class="callout">
+      <strong>To request access:</strong> Contact the principal investigator at the address below with a brief description of your research question, your institutional affiliation, and whether your institution has an active IRB protocol or intends to obtain one.
+    </div>
+
+    <h3>Access Process</h3>
+    <ol>
+      <li>Submit a brief research proposal to the PI (see Contact below)</li>
+      <li>Execute a Data Use Agreement with the Helfgott Research Institute</li>
+      <li>Provide IRB approval or exemption determination from your institution</li>
+      <li>Receive read-only BigQuery access credentials</li>
+    </ol>
+
+    <p style="margin-top: 1rem;">Access is provided as read-only credentials to the Google BigQuery dataset. Data download to local storage is not permitted under the DUA.</p>
+  </section>
+
+  <!-- Code & Governance -->
+  <section id="code">
+    <h2>Code &amp; Governance</h2>
+
+    <h3>Analysis Code</h3>
+    <p>The complete data pipeline, keyword classification rules, NLP extraction scripts, and analysis code are publicly available on GitHub. This includes the FHIR import pipeline, de-identification workflow, BigQuery schema definitions, and all analysis scripts used in the pilot study.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://github.com/pkalnins/nd_ehr_analysis" target="_blank">View Code on GitHub</a>
+    </div>
+
+    <h3>Governance Documents</h3>
+    <p>The following documents are available upon request:</p>
+    <ul>
+      <li>Data Use Agreement template</li>
+      <li>Data Access Policy</li>
+      <li>NUNM IRB Approval (#CK021726)</li>
+      <li>De-identification attestation</li>
+      <li>Clinic data sharing agreement template</li>
+    </ul>
+
+    <h3>Citing This Resource</h3>
+    <p>If you use this database in published research, please cite the pilot manuscript:</p>
+    <div class="callout">
+      Kalnins P, Bradley R, Chamberlin S, Simon M, Sweet E, Calabrese C. Building a Research Database from Naturopathic EHR Data: A Privacy-First, Cloud-Based Informatics Pilot. <em>BMC Complementary Medicine and Therapies.</em> [In submission, 2026.]
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-card">
+      <div class="name">Paul Kalnins, ND, MS</div>
+      <div class="role">Principal Investigator<br>Helfgott Research Institute<br>National University of Natural Medicine, Portland, OR</div>
+      <a href="mailto:pkalnins@nunm.edu">pkalnins@nunm.edu</a>
+    </div>
+    <p style="margin-top: 1.2rem; font-family: Arial, sans-serif; font-size: 0.88rem; color: #555;">
+      Funded by RAND REACH / NCCIH U24 Pilot Grant. Institutional partner: Institute for Natural Medicine (INM).
+    </p>
+  </section>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <p>Helfgott Research Institute &middot; National University of Natural Medicine &middot; Portland, OR</p>
+  <p style="margin-top: 0.4rem;">
+    <a href="https://github.com/pkalnins/nd_ehr_analysis">Code Repository</a> &middot;
+    <a href="mailto:pkalnins@nunm.edu">Contact</a>
+  </p>
+</footer>
+
+</body>
+</html>
