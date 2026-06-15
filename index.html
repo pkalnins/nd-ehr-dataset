@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ND-EHR Research Database</title>
+  <title>ND-EHR Dataset</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -222,7 +222,7 @@
 <!-- ══════════════ HEADER ══════════════ -->
 <header>
   <p class="eyebrow">Helfgott Research Institute &middot; National University of Natural Medicine</p>
-  <h1>Naturopathic EHR Research Database</h1>
+  <h1>ND-EHR Dataset</h1>
   <p class="subtitle">A de-identified, multi-clinic research database assembled from seven community naturopathic practices in Washington State.</p>
   <div class="stats-bar">
     <div class="stat"><span class="num">58,498</span><span class="lbl">Patients</span></div>
@@ -249,9 +249,9 @@
 
   <!-- About -->
   <section id="about">
-    <h2>About the Database</h2>
-    <p>This database was assembled as part of a methods-feasibility pilot funded by RAND REACH / NCCIH (U24 Pilot Grant) and conducted at the Helfgott Research Institute, National University of Natural Medicine. De-identified retrospective EHR data were extracted from seven community naturopathic clinics in Washington State using the FHIR R4 API, de-identified using Google Cloud Healthcare API and Data Loss Prevention, and loaded into a structured cloud-based research database (Google BigQuery).</p>
-    <p>The database supports population characterization, treatment-pattern analysis, and longitudinal outcome analyses. Treatment orders were extracted from clinical notes using a validated keyword classification system (positive predictive value 93.3%, 95% CI: 90–96%) and categorized into 12 naturopathic treatment modalities.</p>
+    <h2>About the ND-EHR Dataset</h2>
+    <p>The ND-EHR Dataset was assembled as part of a methods-feasibility pilot funded by RAND REACH / NCCIH (U24 Pilot Grant) and conducted at the Helfgott Research Institute, National University of Natural Medicine. De-identified retrospective EHR data were extracted from seven community naturopathic clinics in Washington State using the FHIR R4 API, de-identified using Google Cloud Healthcare API and Data Loss Prevention, and loaded into a structured cloud-based research database (Google BigQuery).</p>
+    <p>The ND-EHR Dataset supports population characterization, treatment-pattern analysis, and longitudinal outcome analyses. Treatment orders were extracted from clinical notes using a validated keyword classification system (positive predictive value 93.3%, 95% CI: 90–96%) and categorized into 12 naturopathic treatment modalities.</p>
     <p>The study was approved by the NUNM Institutional Review Board (IRB #CK021726). All clinics executed data sharing agreements prior to data extraction.</p>
     <div class="tags">
       <span class="tag">Naturopathic Medicine</span>
@@ -286,32 +286,23 @@
     <h3>Treatment Categories</h3>
     <p>Treatment orders were extracted from plan sections of clinical notes and classified into 12 naturopathic treatment modalities. Three additional categories are captured as clinical practice metrics.</p>
     <table>
-      <thead><tr><th>Category</th><th>Type</th><th>Elevated HbA1c Cohort (n=2,965)</th></tr></thead>
+      <thead><tr><th>Category</th><th>Type</th></tr></thead>
       <tbody>
-        <tr><td class="mono">supplement</td><td>Naturopathic treatment</td><td class="num">77.8%</td></tr>
-        <tr><td class="mono">diet_nutrition</td><td>Naturopathic treatment</td><td class="num">47.5%</td></tr>
-        <tr><td class="mono">exercise_physical_activity</td><td>Naturopathic treatment</td><td class="num">39.7%</td></tr>
-        <tr><td class="mono">stress_mindfulness</td><td>Naturopathic treatment</td><td class="num">28.4%</td></tr>
-        <tr><td class="mono">botanical</td><td>Naturopathic treatment</td><td class="num">26.0%</td></tr>
-        <tr><td class="mono">sleep_hygiene</td><td>Naturopathic treatment</td><td class="num">15.4%</td></tr>
-        <tr><td class="mono">hormone_therapy</td><td>Naturopathic treatment</td><td class="num">14.5%</td></tr>
-        <tr><td class="mono">physical_therapy_bodywork</td><td>Naturopathic treatment</td><td class="num">10.9%</td></tr>
-        <tr><td class="mono">tcm_acupuncture</td><td>Naturopathic treatment</td><td class="num">5.4%</td></tr>
-        <tr><td class="mono">iv_therapy</td><td>Naturopathic treatment</td><td class="num">5.0%</td></tr>
-        <tr><td class="mono">hydrotherapy</td><td>Naturopathic treatment</td><td class="num">1.5%</td></tr>
-        <tr><td class="mono">homeopathy</td><td>Naturopathic treatment</td><td class="num">1.4%</td></tr>
-        <tr><td class="mono">lab_diagnostic</td><td>Clinical practice metric</td><td class="num">72.6%</td></tr>
-        <tr><td class="mono">referral</td><td>Clinical practice metric</td><td class="num">—</td></tr>
-        <tr><td class="mono">substance_cessation</td><td>Clinical practice metric</td><td class="num">—</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Pre-Built Research Cohorts</h3>
-    <table>
-      <thead><tr><th>Table</th><th>Definition</th><th>N</th></tr></thead>
-      <tbody>
-        <tr><td class="mono">cohort_elevated_hba1c</td><td>Patients with HbA1c ≥5.7% and ≥1 treatment order</td><td class="num">2,965</td></tr>
-        <tr><td class="mono">cohort_longitudinal_hba1c</td><td>Patients with ≥2 HbA1c measurements</td><td class="num">5,576</td></tr>
+        <tr><td class="mono">supplement</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">diet_nutrition</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">exercise_physical_activity</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">stress_mindfulness</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">botanical</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">sleep_hygiene</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">hormone_therapy</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">physical_therapy_bodywork</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">tcm_acupuncture</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">iv_therapy</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">hydrotherapy</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">homeopathy</td><td>Naturopathic treatment</td></tr>
+        <tr><td class="mono">lab_diagnostic</td><td>Clinical practice metric</td></tr>
+        <tr><td class="mono">referral</td><td>Clinical practice metric</td></tr>
+        <tr><td class="mono">substance_cessation</td><td>Clinical practice metric</td></tr>
       </tbody>
     </table>
   </section>
@@ -319,7 +310,7 @@
   <!-- Data Dictionary -->
   <section id="dictionary">
     <h2>Data Dictionary</h2>
-    <p>The database is hosted in Google BigQuery (dataset: <code>nd-ehr-analysis.nd_ehr_research</code>) and comprises 11 tables plus derived views.</p>
+    <p>The ND-EHR Dataset is hosted in Google BigQuery (dataset: <code>nd-ehr-analysis.nd_ehr_research</code>) and comprises 11 tables plus derived views.</p>
 
     <h3>Core Tables</h3>
     <table>
@@ -406,7 +397,7 @@
   <!-- Data Access -->
   <section id="access">
     <h2>Data Access</h2>
-    <p>The de-identified research database is available to qualified investigators under an approved data use agreement (DUA). Access is subject to a signed DUA with the Helfgott Research Institute and IRB determination at the requesting institution.</p>
+    <p>The ND-EHR Dataset is available to qualified investigators under an approved data use agreement (DUA). Access is subject to a signed DUA with the Helfgott Research Institute and IRB determination at the requesting institution.</p>
 
     <div class="callout">
       <strong>To request access:</strong> Contact the principal investigator at the address below with a brief description of your research question, your institutional affiliation, and whether your institution has an active IRB protocol or intends to obtain one.
@@ -420,7 +411,7 @@
       <li>Receive read-only BigQuery access credentials</li>
     </ol>
 
-    <p style="margin-top: 1rem;">Access is provided as read-only credentials to the Google BigQuery dataset. Data download to local storage is not permitted under the DUA.</p>
+    <p style="margin-top: 1rem;">Access is provided as read-only credentials to the ND-EHR Dataset in Google BigQuery. Data download to local storage is not permitted under the DUA.</p>
   </section>
 
   <!-- Code & Governance -->
