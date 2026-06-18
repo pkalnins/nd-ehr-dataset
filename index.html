@@ -237,10 +237,10 @@
 <!-- ══════════════ NAV ══════════════ -->
 <nav>
   <a href="#about">About</a>
-  <a href="#contents">Database Contents</a>
-  <a href="#dictionary">Data Dictionary</a>
   <a href="#access">Data Access</a>
   <a href="#code">Code &amp; Governance</a>
+  <a href="#contents">Database Contents</a>
+  <a href="#dictionary">Data Dictionary</a>
   <a href="#contact">Contact</a>
 </nav>
 
@@ -262,6 +262,56 @@
       <span class="tag">Treatment Patterns</span>
       <span class="tag">Longitudinal</span>
       <span class="tag">Real-World Data</span>
+    </div>
+  </section>
+
+  <!-- Data Access -->
+  <section id="access">
+    <h2>Data Access</h2>
+    <p>The ND-EHR Dataset is available to qualified investigators under an approved data use agreement (DUA). Access is subject to a signed DUA with the Helfgott Research Institute and IRB determination at the requesting institution.</p>
+
+    <div class="callout">
+      <strong>To request access:</strong> Contact the principal investigator at the address below with a brief description of your research question, your institutional affiliation, and whether your institution has an active IRB protocol or intends to obtain one.
+    </div>
+
+    <h3>Access Process</h3>
+    <ol>
+      <li>Submit a brief research proposal to the PI (see Contact below)</li>
+      <li>Execute a Data Use Agreement with the Helfgott Research Institute</li>
+      <li>Provide IRB approval or exemption determination from your institution</li>
+      <li>Receive read-only BigQuery access credentials</li>
+    </ol>
+
+    <p style="margin-top: 1rem;">Access is provided as read-only credentials to the ND-EHR Dataset in Google BigQuery. Data download to local storage is not permitted under the DUA.</p>
+  </section>
+
+  <!-- Code & Governance -->
+  <section id="code">
+    <h2>Code &amp; Governance</h2>
+
+    <h3>Analysis Code</h3>
+    <p>The complete data pipeline, keyword classification rules, NLP extraction scripts, and analysis code will be made publicly available on GitHub upon manuscript acceptance. This will include the FHIR import pipeline, de-identification workflow, BigQuery schema definitions, and all analysis scripts used in the pilot study.</p>
+
+    <h3>Interactive Dashboard</h3>
+    <p>An interactive summary dashboard showing database characteristics, treatment frequencies, and HbA1c trajectory analyses from the pilot study is publicly available.</p>
+    <div class="btn-row">
+      <a class="btn btn-outline" href="https://pkalnins.github.io/nd-ehr-dashboard/" target="_blank">View Dashboard</a>
+    </div>
+
+    <h3>Governance Documents</h3>
+    <p>The following documents are available upon request:</p>
+    <ul>
+      <li>Data Use Agreement template</li>
+      <li>Data Access Policy</li>
+      <li>NUNM IRB Approval (#CK021726)</li>
+      <li>De-identification attestation</li>
+      <li>Clinic data sharing agreement template</li>
+    </ul>
+
+    <h3>Citing This Resource</h3>
+    <p>If you use this database in published research, please cite the pilot manuscript:</p>
+    <div class="callout">
+      Kalnins P, Bradley R, Chamberlin S, Simon M, Sweet E, Calabrese C. Transforming Multi-Clinic Naturopathic EHR Data into a Research Database: Development and Validation of a Privacy-Preserving Pipeline. <em>BMC Complementary Medicine and Therapies.</em> [In submission, 2026.]
     </div>
   </section>
 
@@ -391,56 +441,6 @@
 
     <div class="callout">
       <strong>Key data quality notes:</strong> Encounter dates are shifted per patient (±0–364 days) — cross-patient calendar-time analyses are not supported. Clinic 1 has minimal lab data (providers did not enter results into ChARM). Race/ethnicity is 89.1% unknown. Medication names are free-text and not normalized to a standard vocabulary. Cross-clinic patient duplication was not corrected; patients seen at multiple clinics appear as distinct records.
-    </div>
-  </section>
-
-  <!-- Data Access -->
-  <section id="access">
-    <h2>Data Access</h2>
-    <p>The ND-EHR Dataset is available to qualified investigators under an approved data use agreement (DUA). Access is subject to a signed DUA with the Helfgott Research Institute and IRB determination at the requesting institution.</p>
-
-    <div class="callout">
-      <strong>To request access:</strong> Contact the principal investigator at the address below with a brief description of your research question, your institutional affiliation, and whether your institution has an active IRB protocol or intends to obtain one.
-    </div>
-
-    <h3>Access Process</h3>
-    <ol>
-      <li>Submit a brief research proposal to the PI (see Contact below)</li>
-      <li>Execute a Data Use Agreement with the Helfgott Research Institute</li>
-      <li>Provide IRB approval or exemption determination from your institution</li>
-      <li>Receive read-only BigQuery access credentials</li>
-    </ol>
-
-    <p style="margin-top: 1rem;">Access is provided as read-only credentials to the ND-EHR Dataset in Google BigQuery. Data download to local storage is not permitted under the DUA.</p>
-  </section>
-
-  <!-- Code & Governance -->
-  <section id="code">
-    <h2>Code &amp; Governance</h2>
-
-    <h3>Analysis Code</h3>
-    <p>The complete data pipeline, keyword classification rules, NLP extraction scripts, and analysis code will be made publicly available on GitHub upon manuscript acceptance. This will include the FHIR import pipeline, de-identification workflow, BigQuery schema definitions, and all analysis scripts used in the pilot study.</p>
-
-    <h3>Interactive Dashboard</h3>
-    <p>An interactive summary dashboard showing database characteristics, treatment frequencies, and HbA1c trajectory analyses from the pilot study is publicly available.</p>
-    <div class="btn-row">
-      <a class="btn btn-outline" href="https://pkalnins.github.io/nd-ehr-dashboard/" target="_blank">View Dashboard</a>
-    </div>
-
-    <h3>Governance Documents</h3>
-    <p>The following documents are available upon request:</p>
-    <ul>
-      <li>Data Use Agreement template</li>
-      <li>Data Access Policy</li>
-      <li>NUNM IRB Approval (#CK021726)</li>
-      <li>De-identification attestation</li>
-      <li>Clinic data sharing agreement template</li>
-    </ul>
-
-    <h3>Citing This Resource</h3>
-    <p>If you use this database in published research, please cite the pilot manuscript:</p>
-    <div class="callout">
-      Kalnins P, Bradley R, Chamberlin S, Simon M, Sweet E, Calabrese C. Building a Research Database from Naturopathic EHR Data: A Privacy-First, Cloud-Based Informatics Pilot. <em>BMC Complementary Medicine and Therapies.</em> [In submission, 2026.]
     </div>
   </section>
 
