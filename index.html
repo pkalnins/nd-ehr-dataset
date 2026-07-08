@@ -209,6 +209,47 @@
     ol { padding-left: 1.4rem; }
     ul { padding-left: 1.4rem; }
 
+    /* ── Numbered step list ── */
+    .steps {
+      list-style: none;
+      padding-left: 0;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      margin-top: 0.6rem;
+    }
+    .steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.55;
+    }
+    .steps .step-num {
+      flex: 0 0 auto;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: #1a3a6b;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.05rem;
+    }
+
+    /* ── Compact note list ── */
+    .notes {
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: #444;
+      padding-left: 1.2rem;
+      margin-top: 1rem;
+      line-height: 1.7;
+    }
+    .notes li { margin-bottom: 0.3rem; }
+
     @media (max-width: 600px) {
       header h1 { font-size: 1.5rem; }
       .stats-bar { gap: 1.2rem; }
@@ -275,16 +316,17 @@
     </div>
 
     <h3>Access Process</h3>
-    <ol>
-      <li>Submit a research question to Helfgott/NUNM for scientific and ethical vetting</li>
-      <li>Obtain IRB approval — through your home institution (Helfgott/NUNM issues an IRB reliance agreement) or through NUNM's IRB directly</li>
-      <li>Execute a Data Use Agreement with the Helfgott Research Institute; data fees apply</li>
-      <li>Receive access: read-only BigQuery credentials for self-service analysis, or request assisted analysis by the project's data consultant</li>
+    <ol class="steps">
+      <li><span class="step-num">1</span><span>Submit a research question to Helfgott/NUNM for scientific and ethical vetting</span></li>
+      <li><span class="step-num">2</span><span>Obtain IRB approval — through your home institution (Helfgott/NUNM issues an IRB reliance agreement) or through NUNM's IRB directly</span></li>
+      <li><span class="step-num">3</span><span>Execute a Data Use Agreement with the Helfgott Research Institute; data fees apply</span></li>
+      <li><span class="step-num">4</span><span>Receive access: read-only BigQuery credentials for self-service analysis, or request assisted analysis by the project's data consultant</span></li>
     </ol>
 
-    <p style="margin-top: 1rem;">Self-service access is provided as read-only credentials to the ND-EHR Dataset in Google BigQuery. Data download to local storage is not permitted under the DUA.</p>
-
-    <p style="margin-top: 1rem;">The Institute for Natural Medicine (INM) is acknowledged on resulting papers and presentations but does not participate in access vetting or governance.</p>
+    <ul class="notes">
+      <li>Self-service access is provided as read-only credentials to the ND-EHR Dataset in Google BigQuery. Data download to local storage is not permitted under the DUA.</li>
+      <li>The Institute for Natural Medicine (INM) is acknowledged on resulting papers and presentations but does not participate in access vetting or governance.</li>
+    </ul>
   </section>
 
   <!-- Code & Governance -->
